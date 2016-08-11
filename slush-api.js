@@ -23,6 +23,7 @@ module.exports = function( done ){
 	const githubOrigin = utils.getGithubUrl()
 	let repo, user, userRepo = null
 	if( githubOrigin != '' ){
+		githubOrigin = githubOrigin.trim()
 		repo = path.basename( githubOrigin ).trim()
 		user = path.basename( path.resolve( githubOrigin, '../' ) ).trim()
 		userRepo = `${user}/${repo}`.trim()

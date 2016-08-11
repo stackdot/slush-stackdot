@@ -1,6 +1,6 @@
 {
   "name": "slush-stackdot",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Slush generator for UI and API projects.",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/stackdot/slush-stackdot.git"
   },
-  "author": "",
+  "author": "Quinton Pike",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/stackdot/slush-stackdot/issues"
