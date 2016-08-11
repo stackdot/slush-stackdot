@@ -1,6 +1,6 @@
 {
   "name": "slush-stackdot",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Slush generator for UI projects",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,10 @@
     "url": "https://github.com/stackdot/slush-stackdot/issues"
   },
   "homepage": "https://github.com/stackdot/slush-stackdot#readme",
+  "engineStrict": true,
+  "engines": {
+    "node": ">6.0.0"
+  },
   "dependencies": {
     "async": "^2.0.0",
     "gulp": "^3.9.0",
