@@ -24,11 +24,15 @@ Running the project:
 
 Inside the directory run:
 
-	npm start
+```bash
+npm start
+```
 
 There are several options, to list them, run:
 
-	npm start --help
+```bash
+npm start --help
+```
 
 Be sure to run `npm update` to ensure all the NPM dependencies are up to date.
 

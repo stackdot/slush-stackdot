@@ -25,11 +25,15 @@ Running the project:
 
 Inside the directory run:
 
-	gulp
+```bash
+gulp
+```
 
 There are several options when using gulp, to list them, run:
 
-	gulp --help
+```bash
+gulp --help
+```
 
 Be sure to run `npm update` to ensure all the NPM dependencies are up to date.
 
@@ -39,7 +43,9 @@ Building for prod:
 
 To build the project, which puts all built files into `public/` run the following:
 
-	gulp build
+```bash
+gulp build
+```
 
 This will:
 
