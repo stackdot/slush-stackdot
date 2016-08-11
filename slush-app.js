@@ -39,22 +39,22 @@ module.exports = function( done ){
 		{
 			type: 'input',
 			name: 'name',
-			message: 'Your app name',
+			message: 'App Name:',
 			default: repo || utils.getAppName()
 		}, {
 			type: 'input',
 			name: 'description',
-			message: 'App Description',
-			default: 'Another UI App..'
+			message: 'App Description:',
+			default: 'Just Another UI App..'
 		}, {
 			type: 'input',
 			name: 'dockerhubRepo',
-			message: `DockerHub Repo ( eg: ${userRepo} ) Leave blank not to configure`,
+			message: `DockerHub Repo ( eg: ${userRepo || 'username/repo'} ) Leave blank not to configure:`,
 			default: ''
 		}, {
 			type: 'confirm',
 			name: 'publishNPM',
-			message: 'Attempt to publish NPM package on build',
+			message: 'Attempt to publish NPM package on build?',
 			default: false
 		}, {
 			type: 'confirm',
@@ -77,7 +77,14 @@ module.exports = function( done ){
 			return done()
 		}
 
-		gulp.src( __dirname + '/templates/ui/**' )
+		let src = [ `${__dirname}/templates/ui/**` ]
+		if( answers.dockerhubRepo == '' ){
+			src.push( `!${__dirname}/templates/ui/Dockerfile` )
+			src.push( `!${__dirname}/templates/ui/.dockerignore` )
+			src.push( `!${__dirname}/templates/ui/.nginx.conf` )
+		}
+
+		gulp.src( src )
 			.pipe( template( answers ) )
 			.pipe( rename(( file ) => {
 				if( file.basename[0] === '_' ){

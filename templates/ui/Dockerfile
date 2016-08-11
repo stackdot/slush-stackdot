@@ -1,9 +1,7 @@
-FROM node:6.3.1-slim
+FROM nginx:stable
 
-# Install Deps
-WORKDIR /ui
+# Copy Nginx Config
+COPY .nginx.conf /etc/nginx/nginx.conf
 
-# Copy App
-COPY . /ui/
-
-CMD [ "npm", "start" ]
+# Copy Built App
+COPY ./public/ /ui/public/
