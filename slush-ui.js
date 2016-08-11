@@ -21,17 +21,11 @@ module.exports = function( done ){
 	gutil.log( 'Creating UI project..' )
 
 	const githubOrigin = utils.getGithubUrl()
-	let repo = null
-	let user = null
-	let userRepo = null
-
+	let repo, user, userRepo = null
 	if( githubOrigin != '' ){
-		
 		repo = path.basename( githubOrigin ).trim()
 		user = path.basename( path.resolve( githubOrigin, '../' ) ).trim()
 		userRepo = `${user}/${repo}`.trim()
-		console.log( 'GitHub url:', githubOrigin, repo, user )
-
 	}
 	
 
@@ -69,6 +63,11 @@ module.exports = function( done ){
 			}
 		}, {
 			type: 'confirm',
+			name: 'install',
+			message: 'Run NPM Install Now?',
+			default: true
+		}, {
+			type: 'confirm',
 			name: 'moveon',
 			message: 'Continue?'
 		}
@@ -82,8 +81,7 @@ module.exports = function( done ){
 		answers.githubOrigin = githubOrigin || ''
 		answers.publishNPM = lodash.includes( answers.publish, 'NPM' )
 		answers.dockerRepoName = answers.dockerRepoName || ''
-
-		let features = answers.features
+		answers.includes = lodash.includes
 
 		if( !answers.moveon ){
 			console.log( 'CANCELLED', answers )
@@ -97,8 +95,8 @@ module.exports = function( done ){
 			src.push( `!${__dirname}/templates/ui/_nginx.conf` )
 		}
 
-		gulp.src( src )
-			.pipe( template( answers ) )
+		let stream = gulp.src( src )
+			.pipe( template( answers, { 'interpolate': /<%=([\s\S]+?)%>/g } ) )
 			.pipe( rename(( file ) => {
 				if( file.basename[0] === '_' ){
 					file.basename = '.' + file.basename.slice( 1 )
@@ -106,10 +104,11 @@ module.exports = function( done ){
 			}))
 			.pipe( conflict('./') )
 			.pipe( gulp.dest('./') )
-			.pipe( install() )
-			.on( 'finish', () => {
-				done()
-			})
+
+		if( answers.install ){
+			stream = stream.pipe( install() )
+		}
+		stream.on( 'finish', () => done() )
 
 	})
 

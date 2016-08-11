@@ -1,0 +1,35 @@
+{
+  "name": "<%=appNameSlug%>",
+  "version": "1.0.0",
+  "description": "<%=description%>",
+  "main": "app/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app/index.js"
+  },<% if(githubOrigin != ''){ %>
+  "repository": {
+    "type": "git",
+    "url": "git+<%=githubOrigin%>.git"
+  },
+  "bugs": {
+    "url": "<%=githubOrigin%>/issues"
+  },
+  "homepage": "<%=githubOrigin%>#readme",<% } %>
+  "author": "",
+  "license": "ISC",
+  "engineStrict": true,
+  "tags": [ "api", "restify", "stackdot" ],
+  "engines": {
+    "node": ">6.0.0"
+  },
+  "dependencies": {
+    "colors": "^1.1.2",
+    "debug": "^2.2.0",
+    "lodash": "^4.14.2",
+    "q": "^1.4.1",<% if(includes( databases, 'MongoDB')){ %>
+    "mongoose": "^4.5.8",<% } %><% if(includes( databases, 'LevelDB')){ %>
+    "level": "^1.4.0",<% } %><% if(includes( databases, 'MySQL')){ %>
+    "mysql": "^2.11.1",<% } %>
+    "restify-loader": "^1.0.12"
+  }
+}

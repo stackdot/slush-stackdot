@@ -31,7 +31,7 @@ var config = {
 			dest: 'styles',
 			paths: [
 				'node_modules/',
-				'node_modules/font-awesome/scss',
+				'node_modules/font-awesome/scss'
 			],
 			artifacts: {
 				'app': {
@@ -54,19 +54,19 @@ var config = {
 			noParse: vendors
 		},
 		html: {
-			src: '*.html',
+			src: '*.html'
 		},
 		images: {
 			src: [
 				'app/images/**/*.+(png|jpg|gif|jpeg)'
 			],
-			dest: 'images',
+			dest: 'images'
 		},
 		fonts: {
 			src: [
-				'node_modules/font-awesome/fonts/**/*',
+				'node_modules/font-awesome/fonts/**/*'
 			],
-			dest: 'styles/fonts',
+			dest: 'styles/fonts'
 		},
 	}
 }

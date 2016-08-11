@@ -8,7 +8,6 @@
 
 - [NodeJS](https://nodejs.org/en/download/) ( Version 6+ )
  - We recommend using [Node Version Manager](https://github.com/creationix/nvm)
-- Gulp: `npm install -g gulp`
 
 ---
 
@@ -23,31 +22,14 @@
 
 Inside the directory run:
 
-	gulp
+	npm start
 
-There are several options when using gulp, to list them, run:
+There are several options, to list them, run:
 
-	gulp --help
+	npm start --help
 
 Be sure to run `npm update` to ensure all the NPM dependencies are up to date.
 
-
----
-
-#### Building for prod:
-
-To build the project, which puts all built files into `public/` run the following:
-
-	gulp build
-
-This will:
-
-- minify all javascript files
-- optimize all image files
-- minify css files
-- remove all `console.log` in the code
-
----
 
 
 

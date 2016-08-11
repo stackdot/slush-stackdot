@@ -20,4 +20,9 @@ Be in the directory of the new module. For instance if your new module name is g
 
 ### Create a new API project
 
-Coming Soon.
+When creating a new API project you will have the option to include database(s)
+- MongoDB
+- LevelDB
+- MySQL
+
+	slush stackdot:api

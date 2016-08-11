@@ -51,6 +51,7 @@ module.exports = function( done ){
 		
 		let name = answers.name = _s.slugify( answers.name )
 		answers.camelCased = utils.camelize( name )
+		answers.includes = lodash.includes
 
 		if( !answers.moveon ){
 			console.log( 'CANCELLED', answers )
