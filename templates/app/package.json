@@ -1,0 +1,55 @@
+{
+  "name": "cuid",
+  "version": "1.0.0",
+  "description": "[![Build Status](https://drone.stackdot.com/api/badges/stackdot/cuid/status.svg)](https://drone.stackdot.com/stackdot/cuid)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stackdot/cuid.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stackdot/cuid/issues"
+  },
+  "homepage": "https://github.com/stackdot/cuid#readme",
+  "devDependencies": {
+    
+  },
+  "dependencies": {
+    "angular": "^1.4.8",
+    "angular-animate": "^1.4.8",
+    "angular-aria": "^1.4.8",
+    "angular-material": "^1.0.1",
+    "angular-mocks": "^1.4.8",
+    "angular-ui-router": "^0.2.15",
+    "browser-sync": "^2.10.0",
+    "commander": "^2.9.0",
+    "eslint": "^1.10.3",
+    "eslint-plugin-angular": "^0.15.0",
+    "font-awesome": "^4.5.0",
+    "gulp": "^3.8.11",
+    "gulp-changed": "^1.3.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-eslint": "^1.1.1",
+    "gulp-if": "^2.0.0",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-minify-css": "^1.2.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-sass": "^2.1.0",
+    "karma": "^0.13.18",
+    "gulp-sequence": "^0.4.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "highlight.js": "^9.1.0",
+    "http-proxy-middleware": "^0.9.0",
+    "lodash": "^3.10.1",
+    "marked": "^0.3.5",
+    "raw-loader": "^0.5.1",
+    "require-dir": "^0.3.0",
+    "rimraf": "^2.4.3",
+    "webpack": "^1.12.4"
+  }
+}
