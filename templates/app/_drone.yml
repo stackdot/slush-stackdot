@@ -7,20 +7,27 @@ build:
       - npm update
       - npm run build
 
-
+<% if(dockerhubRepo != '' || publishNPM == true){ %>
 publish:
+  <% if(dockerhubRepo != ''){ %>
   docker:
-    repo: stackdot/cuid-api
+    repo: <%=dockerhubRepo%>
     tag:
-      - '$${BRANCH/master/latest}'
+      - '<%="$${BRANCH/master/latest}"%>'
       - '$$BRANCH.$$BUILD_NUMBER'
     registry: registry.hub.docker.com
     username: $$DOCKERHUB_USER
     password: $$DOCKERHUB_PASSWORD
-    email: qrpike@stackdot.com
-    storage_driver: overlay
-
-
+    email: $$DOCKERHUB_EMAIL
+    storage_driver: overlay<% } %>
+  <% if(publishNPM == true){ %>
+  npm:
+    username: $$NPM_USERNAME
+    password: $$NPM_PASSWORD
+    email: $$NPM_EMAIL
+    registry: https://registry.npmjs.org
+    always_auth: true<% } %>
+<% } %>
 
 cache:
   mount:

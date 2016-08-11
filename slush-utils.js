@@ -1,7 +1,7 @@
 
 const lodash = require('lodash')
 const path = require('path')
-
+const spawnSync = require('child_process').spawnSync
 
 module.exports = {
 
@@ -29,6 +29,17 @@ module.exports = {
 		return str.replace( /(?:^\w|[A-Z]|\b\w)/g, ( letter, index ) => {
 			return index == 0 ? letter.toLowerCase() : letter.toUpperCase()
 		}).replace( /\s+/g, '' )
+	},
+
+	getGithubUrl(){
+		let result = spawnSync( 'git', ['config', 'remote.origin.url'], {
+			encoding: 'utf8',
+			cwd: process.cwd()
+		})
+		// TODO: Make sure it's a github url..
+		if(!result.error)
+			return result.stdout.replace('.git','')
+		return ''
 	}
 
 }

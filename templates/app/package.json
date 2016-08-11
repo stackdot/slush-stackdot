@@ -1,21 +1,26 @@
 {
-  "name": "cuid",
+  "name": "<%=appNameSlug%>",
   "version": "1.0.0",
-  "description": "[![Build Status](https://drone.stackdot.com/api/badges/stackdot/cuid/status.svg)](https://drone.stackdot.com/stackdot/cuid)",
+  "description": "UI Application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/gulp/bin/gulp.js build"
+  },<% if(githubOrigin != ''){ %>
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stackdot/cuid.git"
+    "url": "git+<%=githubOrigin%>.git"
+  },
+  "bugs": {
+    "url": "<%=githubOrigin%>/issues"
+  },
+  "homepage": "<%=githubOrigin%>#readme",<% } %>
+  "engineStrict": true,
+  "engines": {
+    "node": ">6.0.0"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/stackdot/cuid/issues"
-  },
-  "homepage": "https://github.com/stackdot/cuid#readme",
   "devDependencies": {
     
   },

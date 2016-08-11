@@ -1,6 +1,6 @@
 {
-  "name": "slush-stackdot-ui",
-  "version": "1.0.0",
+  "name": "slush-stackdot",
+  "version": "1.0.1",
   "description": "Slush generator for UI projects",
   "main": "index.js",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stackdot/slush-stackdot-ui.git"
+    "url": "git+https://github.com/stackdot/slush-stackdot.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/stackdot/slush-stackdot-ui/issues"
+    "url": "https://github.com/stackdot/slush-stackdot/issues"
   },
-  "homepage": "https://github.com/stackdot/slush-stackdot-ui#readme",
+  "homepage": "https://github.com/stackdot/slush-stackdot#readme",
   "dependencies": {
     "async": "^2.0.0",
     "gulp": "^3.9.0",

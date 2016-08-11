@@ -58,7 +58,6 @@ module.exports = function( done ){
 
 		console.log('Answers:', answers)
 
-
 		var directories = []
 		if(answers.directive === true){
 			directories.push('directives')
@@ -73,7 +72,6 @@ module.exports = function( done ){
 			directories.push('styles')
 		}
 
-		console.log('to process', directories)
 		async.each(directories, function( directory, callback ){
 			gulp.src(__dirname + '/templates/module/'+directory+'/**')
 				.pipe(template(answers))
@@ -93,6 +91,9 @@ module.exports = function( done ){
 				}))
 				.pipe(conflict('./'))
 				.pipe(gulp.dest('./'))
+				.on('finish', function () {
+					done()
+				})
 		})
 		
 

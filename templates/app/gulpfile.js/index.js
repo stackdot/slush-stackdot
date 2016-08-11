@@ -25,7 +25,7 @@ const vendors = [
 var config = {
 	app: './app',
 	dest: './public',
-	uiPort: 7676,
+	uiPort: 5000,
 	tasks: {
 		sass: {
 			dest: 'styles',
@@ -82,7 +82,7 @@ program
 
 let env = 'dev'
 const falsy = /^(?:f(?:alse)?|no?|0+)$/i
-Boolean.parse = function(val){
+Boolean.parse = (val) => {
 	return !falsy.test(val) && !!val;
 }
 
@@ -103,6 +103,4 @@ ops.env = env
 let tasks = requireDir( './tasks' )
 
 // load each gulp task and pass it ops:
-tasks = lodash.each(tasks, function(task){
-	return task( ops )
-})
+tasks = lodash.each( tasks, (task) => task( ops ) )
