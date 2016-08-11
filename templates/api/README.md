@@ -1,4 +1,4 @@
-<%if( userRepo ){ %>[![Build Status](https://drone.stackdot.com/api/badges/<%=userRepo%>/status.svg)](https://drone.stackdot.com/<%=userRepo%>) [![dependencies Status](https://david-dm.org/<%=userRepo%>/status.svg)](https://david-dm.org/<%=userRepo%>)<% } %>
+<%if(publishNPM){%>[![NPM Version](https://img.shields.io/npm/v/appNameSlug.svg)](https://www.npmjs.com/package/appNameSlug) <% } %><%if( userRepo ){ %>[![Build Status](https://drone.stackdot.com/api/badges/<%=userRepo%>/status.svg)](https://drone.stackdot.com/<%=userRepo%>) [![dependencies Status](https://david-dm.org/<%=userRepo%>/status.svg)](https://david-dm.org/<%=userRepo%>)<% } %>
 
 # <%=classifyAppName%>
 
