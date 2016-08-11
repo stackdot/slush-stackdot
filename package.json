@@ -1,7 +1,7 @@
 {
   "name": "slush-stackdot",
   "version": "1.0.9",
-  "description": "Slush generator for UI projects",
+  "description": "Slush generator for UI and API projects.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
