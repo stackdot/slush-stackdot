@@ -1,20 +1,19 @@
 'use strict'
 
 
-const inquirer = require('inquirer')
-const _s = require('underscore.string')
-const conflict = require('gulp-conflict')
-const path = require('path')
-const async = require('async')
-const gulp = require('gulp')
-const gutil = require('gulp-util')
-const template = require('gulp-template')
-const rename = require('gulp-rename')
-const lodash = require('lodash')
-const _ = require('underscore')
+const inquirer		= require('inquirer')
+const _s			= require('underscore.string')
+const conflict		= require('gulp-conflict')
+const path			= require('path')
+const async			= require('async')
+const gulp			= require('gulp')
+const gutil			= require('gulp-util')
+const template		= require('gulp-template')
+const rename		= require('gulp-rename')
+const lodash		= require('lodash')
+const _				= require('underscore')
+const utils 		= require('./slush-utils.js')
 
-
-const utils = require('./slush-utils.js')
 
 
 module.exports = function( done ){
@@ -50,48 +49,46 @@ module.exports = function( done ){
 			name: 'moveon',
 			message: 'Continue?'
 		}
-	], function (answers){
+	], ( answers ) => {
 
 		
-		var name = answers.name = _s.slugify( answers.name )
+		let name = answers.name = _s.slugify( answers.name )
 		answers.camelCased = utils.camelize( name )
 
-		console.log('Answers:', answers)
-
-		var directories = []
-		if(answers.directive === true){
-			directories.push('directives')
+		let directories = []
+		if( answers.directive === true ){
+			directories.push( 'directives' )
 		}
-		if(answers.controller === true){
-			directories.push('controllers')
+		if( answers.controller === true ){
+			directories.push( 'controllers' )
 		}
-		if(answers.service === true){
-			directories.push('services')
+		if( answers.service === true ){
+			directories.push( 'services' )
 		}
-		if(answers.styles === true){
-			directories.push('styles')
+		if( answers.styles === true ){
+			directories.push( 'styles' )
 		}
 
-		async.each(directories, function( directory, callback ){
-			gulp.src(__dirname + '/templates/module/'+directory+'/**')
-				.pipe(template(answers))
-				.pipe(rename(function( file ){
-					file.basename = file.basename.replace('name', name)
+		async.each( directories, ( directory, callback ) => {
+			gulp.src( __dirname + '/templates/module/'+directory+'/**' )
+				.pipe( template( answers ) )
+				.pipe( rename(( file ) => {
+					file.basename = file.basename.replace( 'name', name )
 				}))
-				.pipe(conflict('./'+directory+'/'))
-				.pipe(gulp.dest('./'+directory+'/'))
-				.on('finish', function(){
+				.pipe( conflict( './'+directory+'/' ) )
+				.pipe( gulp.dest( './'+directory+'/' ) )
+				.on( 'finish', () => {
 					callback()
 				})
-		}, function(){
-			gulp.src(__dirname + '/templates/module/index.js')
-				.pipe(template(answers))
-				.pipe(rename(function( file ){
+		}, () => {
+			gulp.src( __dirname + '/templates/module/index.js' )
+				.pipe( template( answers ) )
+				.pipe( rename(( file ) => {
 					file.basename = file.basename.replace('name', name)
 				}))
-				.pipe(conflict('./'))
-				.pipe(gulp.dest('./'))
-				.on('finish', function () {
+				.pipe( conflict( './' ) )
+				.pipe( gulp.dest( './' ) )
+				.on( 'finish', () => {
 					done()
 				})
 		})
@@ -100,3 +97,4 @@ module.exports = function( done ){
 	})
 
 }
+

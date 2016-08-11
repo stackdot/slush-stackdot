@@ -1,18 +1,19 @@
-
-const inquirer = require('inquirer')
-const _s = require('underscore.string')
-const conflict = require('gulp-conflict')
-const path = require('path')
-const gulp = require('gulp')
-const gutil = require('gulp-util')
-const template = require('gulp-template')
-const install = require('gulp-install')
-const rename = require('gulp-rename')
-const lodash = require('lodash')
-const _ = require('underscore')
+'use strict'
 
 
-const utils = require( './slush-utils.js' )
+const inquirer		= require('inquirer')
+const _s			= require('underscore.string')
+const conflict		= require('gulp-conflict')
+const path			= require('path')
+const gulp			= require('gulp')
+const gutil			= require('gulp-util')
+const template		= require('gulp-template')
+const install		= require('gulp-install')
+const rename		= require('gulp-rename')
+const lodash		= require('lodash')
+const _				= require('underscore')
+const utils			= require( './slush-utils.js' )
+
 
 
 module.exports = function( done ){
@@ -24,7 +25,7 @@ module.exports = function( done ){
 	let user = null
 	let userRepo = null
 
-	if(githubOrigin != ''){
+	if( githubOrigin != '' ){
 		
 		repo = path.basename( githubOrigin ).trim()
 		user = path.basename( path.resolve( githubOrigin, '../' ) ).trim()
@@ -60,10 +61,10 @@ module.exports = function( done ){
 			name: 'moveon',
 			message: 'Continue?'
 		}
-	], function( answers ){
+	], ( answers ) => {
 
-		answers.appNameSlug = _s.slugify(answers.name)
-		answers.classifyAppName = _s.classify(answers.name)
+		answers.appNameSlug = _s.slugify( answers.name )
+		answers.classifyAppName = _s.classify( answers.name )
 		answers.repo = repo || ''
 		answers.user = user || ''
 		answers.userRepo = userRepo || ''
@@ -71,23 +72,22 @@ module.exports = function( done ){
 
 		let features = answers.features
 
-		if (!answers.moveon){
-			console.log( answers )
-			console.log( 'CANCELLED' )
+		if( !answers.moveon ){
+			console.log( 'CANCELLED', answers )
 			return done()
 		}
 
-		gulp.src(__dirname + '/templates/app/**')
-			.pipe(template( answers ))
-			.pipe(rename(function (file) {
-				if (file.basename[0] === '_') {
-					file.basename = '.' + file.basename.slice(1)
+		gulp.src( __dirname + '/templates/app/**' )
+			.pipe( template( answers ) )
+			.pipe( rename(( file ) => {
+				if( file.basename[0] === '_' ){
+					file.basename = '.' + file.basename.slice( 1 )
 				}
 			}))
-			.pipe(conflict('./'))
-			.pipe(gulp.dest('./'))
-			.pipe(install())
-			.on('finish', function () {
+			.pipe( conflict('./') )
+			.pipe( gulp.dest('./') )
+			.pipe( install() )
+			.on( 'finish', () => {
 				done()
 			})
 

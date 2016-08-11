@@ -1,7 +1,7 @@
 
-const lodash = require('lodash')
-const path = require('path')
-const spawnSync = require('child_process').spawnSync
+const lodash 		= require('lodash')
+const path 			= require('path')
+const spawnSync 	= require('child_process').spawnSync
 
 module.exports = {
 
@@ -19,8 +19,8 @@ module.exports = {
 				appname = require( path.join( process.cwd(), 'package.json' ) ).name
 			} catch (e) {}
 		}
-		if (!appname)
-			appname = path.basename(process.cwd())
+		if( !appname )
+			appname = path.basename( process.cwd() )
 		return appname.replace( /[^\w\s]+?/g, ' ' )
 	},
 
