@@ -47,21 +47,32 @@ module.exports = function( done ){
 			message: 'App Description:',
 			default: 'Just Another UI App..'
 		}, {
-			type: 'input',
-			name: 'dockerhubRepo',
-			message: `DockerHub Repo ( eg: ${userRepo || 'username/repo'} ) Leave blank not to configure:`,
-			default: ''
+			type: 'checkbox',
+			name: 'publish',
+			message: 'Where to publish this app',
+			choices: [
+				{ name: 'NPM' },
+				{ name: 'Docker' }
+			]
 		}, {
-			type: 'confirm',
-			name: 'publishNPM',
-			message: 'Attempt to publish NPM package on build?',
-			default: false
+			type: 'input',
+			name: 'dockerRepoName',
+			message: `Docker Repo Name ( eg: ${userRepo || 'username/repo'} ):`,
+			default: userRepo || '',
+			when: ( answers ) => {
+				return lodash.includes( answers.publish, 'Docker' )
+			},
+			validate: ( answer ) => {
+				if( lodash.isEmpty( answer ) )
+					return 'Should be in {{USERNAME}}/{{REPO}} format.'
+				return true
+			}
 		}, {
 			type: 'confirm',
 			name: 'moveon',
 			message: 'Continue?'
 		}
-	], ( answers ) => {
+	]).then(( answers ) => {
 
 		answers.appNameSlug = _s.slugify( answers.name )
 		answers.classifyAppName = _s.classify( answers.name )
@@ -69,6 +80,8 @@ module.exports = function( done ){
 		answers.user = user || ''
 		answers.userRepo = userRepo || ''
 		answers.githubOrigin = githubOrigin || ''
+		answers.publishNPM = lodash.includes( answers.publish, 'NPM' )
+		answers.dockerRepoName = answers.dockerRepoName || ''
 
 		let features = answers.features
 
@@ -78,10 +91,10 @@ module.exports = function( done ){
 		}
 
 		let src = [ `${__dirname}/templates/ui/**` ]
-		if( answers.dockerhubRepo == '' ){
+		if( !lodash.includes( answers.publish, 'Docker' ) ){
 			src.push( `!${__dirname}/templates/ui/Dockerfile` )
-			src.push( `!${__dirname}/templates/ui/.dockerignore` )
-			src.push( `!${__dirname}/templates/ui/.nginx.conf` )
+			src.push( `!${__dirname}/templates/ui/_dockerignore` )
+			src.push( `!${__dirname}/templates/ui/_nginx.conf` )
 		}
 
 		gulp.src( src )

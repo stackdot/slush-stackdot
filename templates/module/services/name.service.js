@@ -1,12 +1,12 @@
 
-module.exports = function( $http ){
+module.exports = ( $http ) => {
 	return {
-		get: function( callback ){
+		get: ( callback ) => {
 			return $http({
 				method: 'GET',
 				withCredentials: true,
 				url: 'api_url'
-			});
+			})
 		}
-	};
-};
+	}
+}

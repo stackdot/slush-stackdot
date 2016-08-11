@@ -7,11 +7,11 @@ build:
       - npm update
       - npm run build
 
-<% if(dockerhubRepo != '' || publishNPM == true){ %>
+<% if(dockerRepoName != '' || publishNPM == true){ %>
 publish:
-  <% if(dockerhubRepo != ''){ %>
+  <% if(dockerRepoName != ''){ %>
   docker:
-    repo: <%=dockerhubRepo%>
+    repo: <%=dockerRepoName%>
     tag:
       - '<%="$${BRANCH/master/latest}"%>'
       - '$$BRANCH.$$BUILD_NUMBER'

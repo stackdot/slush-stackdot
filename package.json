@@ -1,6 +1,6 @@
 {
   "name": "slush-stackdot",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Slush generator for UI projects",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,7 @@
     "gulp-template": "^4.0.0",
     "gulp-util": "^3.0.6",
     "iniparser": "^1.0.5",
-    "inquirer": "^0.10.1",
+    "inquirer": "^1.1.2",
     "lodash": "^4.13.1",
     "underscore": "^1.8.3",
     "underscore.string": "^3.2.2"

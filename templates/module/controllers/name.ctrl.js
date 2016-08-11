@@ -1,7 +1,7 @@
 // <%=name%> controller:
 
-<% if(service === true){ %>module.exports = function( <%=camelCased%>Service ){<% } else { %>module.exports = function(){<% } %>
+<% if(service === true){ %>module.exports = ( $scope, <%=camelCased%>Service ) => {<% } else { %>module.exports = ( $scope ) => {<% } %>
 
-	var self = this;
+	var self = this
 
-};
+}

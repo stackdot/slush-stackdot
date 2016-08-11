@@ -22,50 +22,64 @@ module.exports = function( done ){
 		{
 			type: 'input',
 			name: 'name',
-			message: 'Name of your module.',
+			message: 'Name of your module:',
 			default: utils.getAppName()
 		},{
-			type: 'confirm',
-			name: 'directive',
-			message: 'Does the module include a DIRECTIVE?',
-			default: true
-		},{
-			type: 'confirm',
-			name: 'controller',
-			message: 'Does the module include a CONTROLLER?',
-			default: true
-		},{
-			type: 'confirm',
-			name: 'service',
-			message: 'Does the module include a SERVICE?',
-			default: true
-		},{
-			type: 'confirm',
-			name: 'styles',
-			message: 'Does the module include a SASS Styles?',
-			default: true
+			type: 'checkbox',
+			name: 'components',
+			message: 'Which pieces does this module need?',
+			choices: [
+				{ name: 'directive', checked: true },
+				{ name: 'controller', checked: true },
+				{ name: 'service', checked: true },
+				{ name: 'styles', checked: true }
+			],
+			validate: ( answer ) => {
+				if( answer.length < 1 )
+					return 'Must select at least 1 component'
+				if( lodash.intersection( answer, [ 'directive', 'controller', 'service' ] ).length < 1 )
+					return 'Must contain a Directive, Service or Controller'
+				return true
+			}
 		},{
 			type: 'confirm',
 			name: 'moveon',
 			message: 'Continue?'
 		}
-	], ( answers ) => {
+	]).then(( answers ) => {
 
 		
 		let name = answers.name = _s.slugify( answers.name )
 		answers.camelCased = utils.camelize( name )
 
+		if( !answers.moveon ){
+			console.log( 'CANCELLED', answers )
+			return done()
+		}
+
 		let directories = []
-		if( answers.directive === true ){
+
+		answers.directive = false
+		if( lodash.includes( answers.components, 'directive' ) ){
+			answers.directive = true
 			directories.push( 'directives' )
 		}
-		if( answers.controller === true ){
+
+		answers.controller = false
+		if( lodash.includes( answers.components, 'controller' )  ){
+			answers.controller = true
 			directories.push( 'controllers' )
 		}
-		if( answers.service === true ){
+
+		answers.service = false
+		if( lodash.includes( answers.components, 'service' )  ){
+			answers.service = true
 			directories.push( 'services' )
 		}
-		if( answers.styles === true ){
+
+		answers.styles = false
+		if( lodash.includes( answers.components, 'styles' )  ){
+			answers.styles = true
 			directories.push( 'styles' )
 		}
 
