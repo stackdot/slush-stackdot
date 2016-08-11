@@ -16,7 +16,7 @@
   },
   "homepage": "<%=githubOrigin%>#readme",<% } %>
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "engineStrict": true,
   "tags": [ "api", "restify", "stackdot" ],
   "engines": {
