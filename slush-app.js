@@ -77,7 +77,7 @@ module.exports = function( done ){
 			return done()
 		}
 
-		gulp.src( __dirname + '/templates/app/**' )
+		gulp.src( __dirname + '/templates/ui/**' )
 			.pipe( template( answers ) )
 			.pipe( rename(( file ) => {
 				if( file.basename[0] === '_' ){

@@ -1,11 +1,13 @@
 <html><head>
 	
-	<title>App</title>
+	<title><%=classifyAppName%></title>
 	<link rel="stylesheet" href="styles/app.css">
 
 </head><body ng-app="app" ng-controller="app.main" layout="row" ng-cloak flex>
 	<section layout="row" flex>
 
+		<h2><%=classifyAppName%></h2>
+		<p><%=description%></p>
 		<div ui-view="content">Not Working..</div>
 
 	</section>
