@@ -22,9 +22,7 @@ module.exports = function( ops ){
 		PROD = PROD || Boolean.parse(process.env.prod);
 		var context = path.join( __dirname, '../../', config.app, config.tasks.webpack.src );
 		var dest = path.join( __dirname, '../../', config.dest, config.tasks.webpack.dest );
-		console.log('DIR', __dirname, context);
 		var modulesDirectories = path.join( __dirname, '../../node_modules/' );
-		console.log('Modules', modulesDirectories);
 
 		// Default DEV settings:
 		var options = {
@@ -81,9 +79,7 @@ module.exports = function( ops ){
 	var webPackTask = function( mode ){
 		return function( callback ){
 			var options = getOptions( (mode != 'dev'));
-			console.log('Options:', options);
 			var WPAC = webpack(options).watch(200, function(err, stats){
-				console.log('WPAC done', err);
 				if(err){
 					notify({
 						title: '',
