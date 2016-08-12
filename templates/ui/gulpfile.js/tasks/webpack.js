@@ -51,24 +51,23 @@ module.exports = function( ops ){
 
 		// PROD options ( minify, etc )
 		if(PROD === true){
-			var prodOptions = {
-				plugins: [
-					// Minify the compiled JS:
-					new webpack.optimize.UglifyJsPlugin({
-						sourceMap: false,
-						mangle: false
-					}),
-					// Make sure we dont have dupes:
-					new webpack.optimize.DedupePlugin(),
-				]
-			};
-			options = lodash.extend(options, prodOptions);
+			options.plugins.push(
+				// Minify the compiled JS:
+				new webpack.optimize.UglifyJsPlugin({
+					sourceMap: false,
+					mangle: false
+				})
+			);
+			options.plugins.push(
+				// Make sure we dont have dupes:
+				new webpack.optimize.DedupePlugin()
+			);
 
 			// Strip out console.log for prod:
-			options.module.loaders.push({
-				test: /\.js$/,
-				loader: 'strip-loader?strip[]=console.log'
-			});
+			// options.module.loaders.push({
+			// 	test: /\.js$/,
+			// 	loader: 'strip-loader?strip[]=console.log'
+			// });
 		}else{
 			options.devtool = 'source-map';
 		}
@@ -76,34 +75,45 @@ module.exports = function( ops ){
 	};
 
 	// Dev version:
-	var webPackTask = function( mode ){
-		return function( callback ){
-			var options = getOptions( (mode != 'dev'));
-			var WPAC = webpack(options).watch(200, function(err, stats){
-				if(err){
-					notify({
-						title: '',
-						'subtitle': 'WebPack Error',
-						'message': err.message,
-						'icon': path.join(__dirname, 'app/images/logo.png'), // case sensitive
-					});
-				}
-				if(mode == 'dev'){
-					browserSync.reload();
-					// On the initial compile, let gulp know the task is done
-					if(!initialCompile){
-						initialCompile = true;
-						callback();
-					}
-				}else{
-					callback();
-				}
-			});
-		};
+	var webPackTask_Watch = function( callback ){
+		var options = getOptions();
+		var WPAC = webpack(options).watch(200, function(err, stats){
+			if(err){
+				notify({
+					title: '',
+					'subtitle': 'WebPack Error',
+					'message': err.message,
+					'icon': path.join(__dirname, 'app/images/logo.png'), // case sensitive
+				});
+			}
+			browserSync.reload();
+			// On the initial compile, let gulp know the task is done
+			if(!initialCompile){
+				initialCompile = true;
+				callback();
+			}
+		});
 	};
 
-	gulp.task('webpack:watch', webPackTask('dev'));
-	gulp.task('webpack:production', webPackTask('prod'));
+	// Prod version:
+	var webPackTask_Production = function( callback ){
+		var options = getOptions(true);
+		var WPAC = webpack(options, function(err, stats){
+			// logger(err, stats)
+			if(err){
+				notify({
+					title: '',
+					'subtitle': 'WebPack Error',
+					'message': err.message,
+					'icon': path.join(__dirname, 'app/images/logo.png'), // case sensitive
+				});
+			}
+			callback(err);
+		});
+	};
+
+	gulp.task('webpack:watch', webPackTask_Watch);
+	gulp.task('webpack:production', webPackTask_Production);
 
 	return {
 		getOptions: getOptions
