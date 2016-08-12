@@ -21,7 +21,7 @@ module.exports = function( ops ){
 
 		PROD = PROD || Boolean.parse(process.env.prod);
 		var context = path.join( __dirname, '../../', config.app, config.tasks.webpack.src );
-		var dest = path.join( __dirname, '../../', config.dest, config.tasks.webpack.dest );
+		var dest = path.join( __dirname, '../../', config.dest, config.tasks.webpack.dest, 'js' );
 		var modulesDirectories = path.join( __dirname, '../../node_modules/' );
 
 		// Default DEV settings:
@@ -30,7 +30,8 @@ module.exports = function( ops ){
 			entry: config.tasks.webpack.artifacts,
 			output: {
 				path: dest,
-				filename: config.tasks.webpack.output
+				filename: config.tasks.webpack.output,
+				publicPath: '/js/'
 			},
 			node: {
 				fs: 'empty'
@@ -44,7 +45,11 @@ module.exports = function( ops ){
 				loaders: config.tasks.webpack.loaders
 			},
 			plugins: [
-				new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.bundle.js')
+				new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.bundle.js'),
+				new webpack.DefinePlugin({
+					VER: '123',
+					PROD: false
+				})
 			],
 			noParse: config.tasks.webpack.noParse || []
 		};
