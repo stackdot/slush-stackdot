@@ -20,7 +20,7 @@ module.exports = function( done ){
 
 	gutil.log( 'Creating API project..' )
 
-	const githubOrigin = utils.getGithubUrl()
+	let githubOrigin = utils.getGithubUrl()
 	let repo, user, userRepo = null
 	if( githubOrigin != '' ){
 		githubOrigin = githubOrigin.trim()
