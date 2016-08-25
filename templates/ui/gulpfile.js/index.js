@@ -50,7 +50,18 @@ var config = {
 				vendors: vendors,
 			},
 			output: '[name].bundle.js',
-			loaders: [{ test: /\.html$/, loader: 'raw' }],
+			loaders: [
+				{
+					test: /\.html$/,
+					loader: 'raw'
+				},{
+					test: /\.js$/,
+					exclude: /(node_modules|bower_components)/,
+					loader: 'babel-loader', // 'babel-loader' is also a legal name to reference
+					query: {
+						presets: ['es2015-script']
+					}
+				}],
 			noParse: vendors
 		},
 		html: {
