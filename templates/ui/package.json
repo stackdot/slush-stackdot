@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
     "build": "./node_modules/gulp/bin/gulp.js build"
   },<% if(githubOrigin != ''){ %>
   "repository": {
@@ -23,7 +24,8 @@
   "tags": ["angular", "material", "stackdot"],
   "license": "MIT",
   "devDependencies": {
-    
+    "jsdoc": "^3.4.0",
+    "minami": "^1.1.1"
   },
   "dependencies": {
     "angular": "^1.4.8",

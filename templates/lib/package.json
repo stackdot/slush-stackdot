@@ -5,8 +5,7 @@
   "main": "app/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "DEBUG=<%=appNameSlug%>* nodemon app/index.js",
-    "start": "node app/index.js"
+    "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },<% if(githubOrigin != ''){ %>
   "repository": {
     "type": "git",
@@ -19,7 +18,7 @@
   "author": "<%=user>",
   "license": "MIT",
   "engineStrict": true,
-  "tags": [ "api", "restify", "stackdot" ],
+  "tags": [ "api", "lib", "library", "stackdot" ],
   "engines": {
     "node": ">6.0.0"
   },
@@ -27,10 +26,10 @@
     "colors": "^1.1.2",
     "debug": "^2.2.0",
     "lodash": "^4.14.2",
-    "q": "^1.4.1",<% if(includes( databases, 'MongoDB')){ %>
-    "mongoose": "^4.5.8",<% } %><% if(includes( databases, 'LevelDB')){ %>
-    "level": "^1.4.0",<% } %><% if(includes( databases, 'MySQL')){ %>
-    "mysql": "^2.11.1",<% } %>
-    "restify-loader": "^1.0.12"
+    "q": "^1.4.1"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.4.0",
+    "minami": "^1.1.1"
   }
 }
