@@ -2,8 +2,8 @@
 
 
 // Load in Route Class
-const Route = require('restify-loader/route')
-const lodash = require('lodash')
+const Route 	= require('restify-loader/route')
+const lodash 	= require('lodash')
 
 
 // Create Route
