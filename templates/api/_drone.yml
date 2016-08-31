@@ -5,7 +5,7 @@ build:
     pull: true
     commands:
       - npm update
-#      - npm test
+      - npm test
 
 <% if(dockerRepoName != '' || publishNPM == true){ %>
 publish:

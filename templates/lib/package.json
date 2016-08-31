@@ -16,7 +16,7 @@
     "url": "<%=githubOrigin%>/issues"
   },
   "homepage": "<%=githubOrigin%>#readme",<% } %>
-  "author": "<%=user>",
+  "author": "<%=user%>",
   "license": "MIT",
   "engineStrict": true,
   "tags": [ "api", "lib", "library", "stackdot" ],

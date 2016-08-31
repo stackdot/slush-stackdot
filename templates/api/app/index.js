@@ -79,3 +79,4 @@ let server = require('restify-loader')({
 // Listen for connections:
 server.listen(PORT, () => debug( `Listening to port: ${PORT}`.good ) )
 
+module.exports = server

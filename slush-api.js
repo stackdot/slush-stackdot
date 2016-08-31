@@ -14,7 +14,7 @@ const lodash		= require('lodash')
 const _				= require('underscore')
 const utils			= require( './slush-utils.js' )
 
-
+Error.stackTraceLimit = Infinity;
 
 module.exports = function( done ){
 
@@ -119,8 +119,8 @@ module.exports = function( done ){
 		if( !lodash.includes( answers.publish, 'Docker' ) ){
 			src.push( `!${__dirname}/templates/api/Dockerfile` )
 			src.push( `!${__dirname}/templates/api/_dockerignore` )
-			src.push( `!${__dirname}/templates/api/_nginx.conf` )
 		}
+
 		// If we arent using Mongo, dont copy the schemas:
 		if( !lodash.includes( answers.databases, 'MongoDB' ) ){
 			src.push( `!${__dirname}/templates/api/app/schemas/**/*` )
