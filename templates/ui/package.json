@@ -28,6 +28,7 @@
     "minami": "^1.1.1"
   },
   "dependencies": {
+    "bluebird": "^3.4.5",
     "angular": "^1.4.8",
     "angular-animate": "^1.4.8",
     "angular-aria": "^1.4.8",
@@ -58,7 +59,6 @@
     "raw-loader": "^0.5.1",
     "require-dir": "^0.3.0",
     "rimraf": "^2.4.3",
-    "q": "^1.4.1",
     "webpack": "^1.12.4"
   }
 }

@@ -14,6 +14,7 @@ const PORT 			= process.env.PORT || <%=port%>
 
 // Modules
 const colors 	= require('colors')
+const Promise 	= require('bluebird')
 const debug 	= require('debug')('<%=appNameSlug%>:main')
 <% if(includes( databases, 'MongoDB')){
 		%>const Mongoose 	= require('mongoose')
@@ -26,6 +27,7 @@ const debug 	= require('debug')('<%=appNameSlug%>:main')
 
 <% if(includes( databases, 'MongoDB')){ %>
 // Connect to MongoDB:
+Mongoose.Promise = Promise
 Mongoose.connect( MONGO_HOST )
 debug( `Connected to MongoDB`.green )
 <% } if(includes( databases, 'LevelDB')){ %>

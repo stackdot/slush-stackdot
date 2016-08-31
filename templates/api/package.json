@@ -25,10 +25,11 @@
     "node": ">6.0.0"
   },
   "dependencies": {
+    "bluebird": "^3.4.5",
     "colors": "^1.1.2",
     "debug": "^2.2.0",
     "lodash": "^4.14.2",
-    "q": "^1.4.1",<% if(includes( databases, 'MongoDB')){ %>
+    <% if(includes( databases, 'MongoDB')){ %>
     "mongoose": "^4.5.8",<% } %><% if(includes( databases, 'LevelDB')){ %>
     "level": "^1.4.0",<% } %><% if(includes( databases, 'MySQL')){ %>
     "mysql": "^2.11.1",<% } %>
