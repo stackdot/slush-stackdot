@@ -1,6 +1,6 @@
-[![Node Version](https://img.shields.io/node/v/slush-stackdot.svg?maxAge=60)](https://www.npmjs.com/package/slush-stackdot) [![NPM Version](https://img.shields.io/npm/v/slush-stackdot.svg?maxAge=60)](https://www.npmjs.com/package/slush-stackdot) [![NPM License](https://img.shields.io/npm/l/slush-stackdot.svg?maxAge=60)](https://www.npmjs.com/package/slush-stackdot) 
+[![Node Version](https://img.shields.io/node/v/slush-stackdot.svg)](https://www.npmjs.com/package/slush-stackdot) [![NPM Version](https://img.shields.io/npm/v/slush-stackdot.svg)](https://www.npmjs.com/package/slush-stackdot) [![NPM License](https://img.shields.io/npm/l/slush-stackdot.svg)](https://www.npmjs.com/package/slush-stackdot) 
 
-[![Build Status](https://drone.stackdot.com/api/badges/stackdot/slush-stackdot/status.svg?maxAge=60)](https://drone.stackdot.com/stackdot/slush-stackdot) [![dependencies Status](https://img.shields.io/david/stackdot/slush-stackdot.svg?maxAge=60)](https://david-dm.org/stackdot/slush-stackdot)
+[![Build Status](https://drone.stackdot.com/api/badges/stackdot/slush-stackdot/status.svg)](https://drone.stackdot.com/stackdot/slush-stackdot) [![dependencies Status](https://img.shields.io/david/stackdot/slush-stackdot.svg)](https://david-dm.org/stackdot/slush-stackdot) [![downloads monthly](https://img.shields.io/npm/dm/slush-stackdot.svg)](https://www.npmjs.com/package/slush-stackdot)
 
 <p align="center"><img src="etc/logo.png" /></p>
 
