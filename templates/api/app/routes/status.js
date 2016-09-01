@@ -4,6 +4,7 @@
 // Load in Route Class
 const Route 	= require('restify-loader/route')
 const lodash 	= require('lodash')
+const Promise 	= require('bluebird')
 
 
 // Create Route
@@ -16,8 +17,7 @@ module.exports = class Status extends Route {
 
 	addListeners(){
 		this.debug( 'Adding Listeners' )
-		this.server.get({
-			url: '/v1/status',
+		this.server.get({ url: '/v1/status',
 			validation: {}
 		}, this.getStatus.bind( this ))
 	}

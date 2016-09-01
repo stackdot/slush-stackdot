@@ -55,7 +55,8 @@ let server = require('restify-loader')({
 	name: '<%=appNameSlug%>',
 	version: '1.0.0',
 	dirs: {
-		libs: 'libs',<% if(includes( databases, 'MongoDB')){ %>
+		libs: 'libs',
+		middleware: 'middleware',<% if(includes( databases, 'MongoDB')){ %>
 		schemas: 'schemas'<% } %>
 	},<% if(raven){ %>
 	raven: {
