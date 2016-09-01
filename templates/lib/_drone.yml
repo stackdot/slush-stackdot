@@ -4,8 +4,7 @@ build:
     image: node:6.3.1
     pull: true<% if(githubOrigin != ''){ %>
     environment:
-      - COVERALLS_REPO_TOKEN=$$COVERALLS_TOKEN
-      - COVERALLS_SERVICE_NAME=<%=userRepo%><% } %>
+      - COVERALLS_REPO_TOKEN=$$COVERALLS_REPO_TOKEN
     commands:
       - npm update
       - npm test
