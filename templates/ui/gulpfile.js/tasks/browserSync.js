@@ -1,7 +1,9 @@
 
-var notify 			= require('gulp-notify');
-var lodash			= require('lodash');
 
+const notify 				= require('gulp-notify')
+const lodash				= require('lodash')
+const historyApiFallback 	= require('connect-history-api-fallback')
+const url 					= require('url')
 
 module.exports = function( ops ){
 
@@ -12,6 +14,7 @@ module.exports = function( ops ){
 	var settings = config.browserSync || {
 		server: {
 			baseDir: config.dest,
+			middleware: [ historyApiFallback() ]
 		},
 		notify: false,
 		ghostMode: false,

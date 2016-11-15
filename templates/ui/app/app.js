@@ -18,7 +18,14 @@ angular.module('app', [
 	'ui.router',
 	'app.test',
 	'ngMaterial',
-]).config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', function( $stateProvider, $urlRouterProvider, $mdThemingProvider ){
+]).config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$locationProvider', function( $stateProvider, $urlRouterProvider, $mdThemingProvider, $locationProvider ){
+
+	// HTML5 history states:
+	$locationProvider.html5Mode({
+		enabled: true,
+		requireBase: false,
+		rewriteLinks: false
+	});
 
 	// URL Routing:
 	$urlRouterProvider.otherwise('/test')
