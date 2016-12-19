@@ -31,12 +31,14 @@ var config = {
 			dest: 'styles',
 			paths: [
 				'node_modules/',
+				'app/styles/',
 				'node_modules/font-awesome/scss'
 			],
 			artifacts: {
 				'app': {
 					src: [
 						'app/styles/app.scss',
+						'app/pages/**/*.scss',
 						'app/modules/**/*.scss'
 					]
 				}

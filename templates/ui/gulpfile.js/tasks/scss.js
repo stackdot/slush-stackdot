@@ -34,7 +34,7 @@ module.exports = function( ops ){
 		if(!PROD){
 			stream = stream.pipe(sourcemaps.init());
 		}
-
+		stream = stream.pipe( concat( filename ) )
 		stream = stream.pipe(sass({
 			includePaths: paths
 		}).on('error', notify.onError(function(err){
@@ -44,7 +44,7 @@ module.exports = function( ops ){
 				'message': err.message,
 				'icon': path.join(__dirname, 'app/images/logo.png'), // case sensitive
 			};
-		}))).pipe(concat( filename ));
+		})))
 
 		if(PROD){
 			stream = stream.pipe(minifyCSS());
