@@ -17,7 +17,7 @@ const vendors = [
 	'angular-animate',
 	'angular-aria',
 	'angular-material',
-	'lodash',
+	'lodash/core',
 	'q'
 ]
 

@@ -16,6 +16,7 @@ module.exports = function( ops ){
 	var sass 			= require('gulp-sass');
 	var concat 			= require('gulp-concat');
 	var notify 			= require('gulp-notify');
+	const rename 		= require("gulp-rename")
 
 	var tasks = [];
 	var DEST = path.join( config.dest, config.tasks.sass.dest );
@@ -23,6 +24,7 @@ module.exports = function( ops ){
 	var sassTask = function( artifact, output ){
 
 		var PROD = Boolean.parse(process.env.prod);
+		let BUILD_NUM = process.env.DRONE_BUILD_NUMBER || 'XX'
 
 		var filename = output+'.css';
 		var paths = lodash.map(config.tasks.sass.paths, function(dir){
@@ -34,6 +36,7 @@ module.exports = function( ops ){
 		if(!PROD){
 			stream = stream.pipe(sourcemaps.init());
 		}
+
 		stream = stream.pipe( concat( filename ) )
 		stream = stream.pipe(sass({
 			includePaths: paths
@@ -44,7 +47,7 @@ module.exports = function( ops ){
 				'message': err.message,
 				'icon': path.join(__dirname, 'app/images/logo.png'), // case sensitive
 			};
-		})))
+		})));
 
 		if(PROD){
 			stream = stream.pipe(minifyCSS());
@@ -52,7 +55,10 @@ module.exports = function( ops ){
 			// sourcemap LESS files, easy debugging:
 			stream = stream.pipe(sourcemaps.write('.'));
 		}
-		stream = stream.pipe(gulp.dest(DEST));
+		stream = stream.pipe(rename({
+				basename: `build.${BUILD_NUM}`
+			}))
+			.pipe(gulp.dest(DEST));
 		return stream;
 	};
 

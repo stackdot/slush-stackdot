@@ -1,7 +1,9 @@
 <html><head>
 	
 	<title><%=classifyAppName%></title>
+	<!-- build:css -->
 	<link rel="stylesheet" href="/styles/app.css">
+	<!-- endbuild -->
 
 </head><body ng-app="app" ng-controller="app.main" layout="row" ng-cloak flex>
 	<section layout="column" flex>
@@ -11,6 +13,8 @@
 		<div ui-view="content">Not Working..</div>
 
 	</section>
+	<!-- build:js -->
 	<script src="/js/vendors.bundle.js"></script>
 	<script src="/js/app.bundle.js"></script>
+	<!-- endbuild -->
 </body></html>

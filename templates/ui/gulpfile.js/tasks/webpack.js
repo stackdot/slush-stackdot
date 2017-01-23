@@ -23,6 +23,7 @@ module.exports = function( ops ){
 		var context = path.join( __dirname, '../../', config.app, config.tasks.webpack.src );
 		var dest = path.join( __dirname, '../../', config.dest, config.tasks.webpack.dest, 'js' );
 		var modulesDirectories = path.join( __dirname, '../../node_modules/' );
+		let BUILD_NUM = process.env.DRONE_BUILD_NUMBER || 'XX'
 
 		// Default DEV settings:
 		var options = {
@@ -30,7 +31,7 @@ module.exports = function( ops ){
 			entry: config.tasks.webpack.artifacts,
 			output: {
 				path: dest,
-				filename: config.tasks.webpack.output,
+				filename: `app.bundle.build.${BUILD_NUM}.js`,
 				publicPath: '/js/'
 			},
 			node: {
@@ -45,17 +46,18 @@ module.exports = function( ops ){
 				loaders: config.tasks.webpack.loaders
 			},
 			plugins: [
-				new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.bundle.js'),
-				new webpack.DefinePlugin({
-					VER: '123',
-					PROD: false
-				})
+				new webpack.optimize.CommonsChunkPlugin('vendors', `vendors.bundle.${BUILD_NUM}.js`),
+				// new webpack.DefinePlugin({
+				// 	VER: '123',
+				// 	PROD: false
+				// })
 			],
 			noParse: config.tasks.webpack.noParse || []
 		};
 
 		// PROD options ( minify, etc )
 		if(PROD === true){
+			
 			options.plugins.push(
 				// Minify the compiled JS:
 				new webpack.optimize.UglifyJsPlugin({
@@ -103,6 +105,7 @@ module.exports = function( ops ){
 	// Prod version:
 	var webPackTask_Production = function( callback ){
 		var options = getOptions(true);
+		console.log( 'PACKAGING FOR BUILD ENV:', process.env.CI_BUILD_NUMBER )
 		var WPAC = webpack(options, function(err, stats){
 			// logger(err, stats)
 			if(err){

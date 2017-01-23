@@ -1,13 +1,14 @@
 
 
-var path 			= require('path');
-var notify 			= require('gulp-notify');
+const path 			= require('path')
+const notify 		= require('gulp-notify')
+const htmlreplace 	= require('gulp-html-replace')
 
 module.exports = function( ops ){
 
-	var gulp = ops.gulp;
-	var config = ops.config;
-	var env = ops.env;
+	const gulp = ops.gulp;
+	const config = ops.config;
+	const env = ops.env;
 	var browserSync = ops.browserSync;
 
 	var paths = {
@@ -17,10 +18,19 @@ module.exports = function( ops ){
 
 	var htmlTask = function(){
 		var PROD = Boolean.parse(process.env.prod);
+		let BUILD_NUM = process.env.DRONE_BUILD_NUMBER || 'XX'
 		var stream = gulp.src( paths.src )
+			.pipe(htmlreplace({
+				'css': `/styles/build.${BUILD_NUM}.css`,
+				'js': [
+					`/js/vendors.bundle.${BUILD_NUM}.js`,
+					`/js/app.bundle.build.${BUILD_NUM}.js`
+				]
+			}))
 			.pipe(gulp.dest( paths.dest ));
-		if(!PROD)
+		if(!PROD){
 			stream = stream.pipe(browserSync.stream());
+		}
 		return stream;
 	};
 
