@@ -1,22 +1,30 @@
 
 module.exports = class <%=camelCased%>Service {
+
 	constructor( $http ){
-		console.log('New Service')
 		this.$http = $http
-		this.data = {
-			item: ''
+		this.state = {
+			data: {}
 		}
 	}
-	get( callback ){
+
+	// Post Request:
+	post( data ){
+		return this.$http({
+			method: 'POST',
+			withCredentials: true,
+			url: `${window.API_BASE}/v1/post`,
+			data: data
+		})
+	}
+
+	// Get Request:
+	get(){
 		return this.$http({
 			method: 'GET',
 			withCredentials: true,
-			url: 'api_url'
-		}).then(( res )=>{
-			this.data.item = res.data
-			callback( res.data )
-		}).catch(( err )=>{
-			console.log('Err', err)
+			url: `${window.API_BASE}/v1/get`
 		})
 	}
+
 }
