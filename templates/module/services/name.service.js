@@ -13,7 +13,7 @@ module.exports = class <%=camelCased%>Service {
 		return this.$http({
 			method: 'POST',
 			withCredentials: true,
-			url: `${window.API_BASE}/v1/post`,
+			url: window.API_BASE+`/v1/post`,
 			data: data
 		})
 	}
@@ -23,7 +23,7 @@ module.exports = class <%=camelCased%>Service {
 		return this.$http({
 			method: 'GET',
 			withCredentials: true,
-			url: `${window.API_BASE}/v1/get`
+			url: window.API_BASE+`/v1/get`
 		})
 	}
 
