@@ -16,6 +16,7 @@ const PORT 			= process.env.PORT || <%=port%>
 const colors 	= require('colors')
 const Promise 	= require('bluebird')
 const debug 	= require('debug')('<%=appNameSlug%>:main')
+const lodash 	= require('lodash')
 <% if(includes( databases, 'MongoDB')){
 		%>const Mongoose 	= require('mongoose')
 <% } if(includes( databases, 'LevelDB')){ 
