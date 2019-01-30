@@ -67,7 +67,7 @@ MySQL.connect((err) => {
 require('restify-loader')({
 	// Restify Loader Params:
 	dir: __dirname,
-	name: 'nyse-backfill',
+	name: '<%=appNameSlug%>',
 	version: '1.0.1',
 	dirs: {
 		libs: 'libs',
