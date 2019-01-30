@@ -28,8 +28,20 @@ const debug 	= require('debug')('<%=appNameSlug%>:main')
 <% if(includes( databases, 'MongoDB')){ %>
 // Connect to MongoDB:
 Mongoose.Promise = Promise
-Mongoose.connect( MONGO_HOST )
+Mongoose.connect( MONGO_HOST, { useMongoClient: true })
 debug( `Connected to MongoDB`.green )
+// If the connection throws an error
+Mongoose.connection.on("error", (err) => {
+	let msg = { app: 'api-symbols', event: 'Mongoose Error', error: err }
+	console.log(JSON.stringify( msg ))
+	process.exit(1);
+})
+// When the connection is disconnected
+Mongoose.connection.on('disconnected', () => {
+	let msg = { app: 'api-symbols', event: 'Mongoose Disconnected' }
+	console.log(JSON.stringify( msg ))
+	process.exit(1);
+})
 <% } if(includes( databases, 'LevelDB')){ %>
 // Connect to LevelDB:
 const LevelDB = levelup( LEVEL_DB_DIR, {
