@@ -1,4 +1,4 @@
-FROM node:6.3.1-slim
+FROM node:9.2.0-slim
 
 # Install Deps
 WORKDIR /api

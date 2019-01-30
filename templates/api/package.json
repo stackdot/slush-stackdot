@@ -33,7 +33,7 @@
     "mongoose": "^4.5.8",<% } %><% if(includes( databases, 'LevelDB')){ %>
     "level": "^1.4.0",<% } %><% if(includes( databases, 'MySQL')){ %>
     "mysql": "^2.11.1",<% } %>
-    "restify-loader": "^1.0.12"
+    "restify-loader": "^2.0.1"
   },
   "devDependencies": {
     "coveralls": "^2.11.12",

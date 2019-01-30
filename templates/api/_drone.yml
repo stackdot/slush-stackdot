@@ -1,15 +1,15 @@
 
 pipeline:
   compile:
-    image: docker.stackdot.com/lib/node:6.3.1
+    image: docker.stackdot.com/lib/node:9.2.0
     commands:
-      - npm update
-      - npm test
+      - npm install
+
 
 <% if(dockerRepoName != ''){ %>
   # Publish to Docker
   docker:
-    image: plugins/docker
+    image: plugins/docker:1.13
     repo: docker.stackdot.com/<%=dockerRepoName%>
     tag:
       - '${DRONE_BRANCH/master/latest}'

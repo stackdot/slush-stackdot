@@ -47,13 +47,16 @@ MySQL.connect((err) => {
 <% } %>
 
 
-// REST API Server:
-let server = require('restify-loader')({
 
+
+
+
+// REST API Server:
+require('restify-loader')({
 	// Restify Loader Params:
 	dir: __dirname,
-	name: '<%=appNameSlug%>',
-	version: '1.0.0',
+	name: 'nyse-backfill',
+	version: '1.0.1',
 	dirs: {
 		libs: 'libs',
 		middleware: 'middleware',<% if(includes( databases, 'MongoDB')){ %>
@@ -70,16 +73,28 @@ let server = require('restify-loader')({
 
 	// Route Paras:
 <% if(includes( databases, 'MongoDB')){
-		%>	Mongoose: Mongoose,
+%>	Mongoose: Mongoose,
 <% } if(includes( databases, 'LevelDB')){ 
- 		%>	LevelDB: LevelDB,
+ %>	LevelDB: LevelDB,
 <% } if(includes( databases, 'MySQL')){ 
- 		%>	MySQL: MySQL
+ %>	MySQL: MySQL,
 <% } %>
+	log: ( msg ) => {
+		console.log(JSON.stringify(msg))
+	}
+
+}).then(( server ) => {
+
+	// All routes are ready and registered, call optional onLoaded method:
+	lodash.each( server.LoadedRoutes, ( route ) => {
+		if( route.onLoaded ) route.onLoaded( server )
+	})
+
+	debug('Symbols API Setup')
+	// Listen for connections:
+	server.listen(PORT, () => debug( `Listening to port: ${PORT}`.good ) )
+
 })
 
 
-// Listen for connections:
-server.listen(PORT, () => debug( `Listening to port: ${PORT}`.good ) )
 
-module.exports = server

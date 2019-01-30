@@ -1,6 +1,6 @@
 {
   "name": "slush-stackdot",
-  "version": "1.0.40",
+  "version": "1.0.41",
   "description": "Slush generator for UI and API projects.",
   "main": "index.js",
   "scripts": {
