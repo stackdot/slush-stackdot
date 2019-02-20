@@ -14,6 +14,7 @@ const PORT 			= process.env.PORT || <%=port%>
 
 // Modules
 const colors 	= require('colors')
+const lodash 	= require('lodash')
 const Promise 	= require('bluebird')
 const debug 	= require('debug')('<%=appNameSlug%>:main')
 const lodash 	= require('lodash')
@@ -33,13 +34,13 @@ Mongoose.connect( MONGO_HOST, { useMongoClient: true })
 debug( `Connected to MongoDB`.green )
 // If the connection throws an error
 Mongoose.connection.on("error", (err) => {
-	let msg = { app: 'api-symbols', event: 'Mongoose Error', error: err }
+	let msg = { app: '<%=appNameSlug%>', event: 'Mongoose Error', error: err }
 	console.log(JSON.stringify( msg ))
 	process.exit(1);
 })
 // When the connection is disconnected
 Mongoose.connection.on('disconnected', () => {
-	let msg = { app: 'api-symbols', event: 'Mongoose Disconnected' }
+	let msg = { app: '<%=appNameSlug%>', event: 'Mongoose Disconnected' }
 	console.log(JSON.stringify( msg ))
 	process.exit(1);
 })
@@ -103,7 +104,7 @@ require('restify-loader')({
 		if( route.onLoaded ) route.onLoaded( server )
 	})
 
-	debug('Symbols API Setup')
+	debug('<%=appNameSlug%> API Setup')
 	// Listen for connections:
 	server.listen(PORT, () => debug( `Listening to port: ${PORT}`.good ) )
 
