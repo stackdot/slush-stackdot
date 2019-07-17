@@ -1,0 +1,76 @@
+
+
+# App UI
+# -------------------------------
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: ui
+  namespace: polygon
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: ui
+        project: polygon-ui
+        type: ui
+    spec:
+      imagePullSecrets:
+        - name: stackdot-registry
+      restartPolicy: Always
+      containers:
+        - name: ui
+          image: docker.stackdot.com/polygon/<%=appNameSlug%>:{{build.branch}}.build-{{build.number}}
+          # image: docker.stackdot.com/polygon/<%=appNameSlug%>:latest
+          env:
+            - name: PORT
+              value: '80'
+          ports:
+            - name: http
+              containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            failureThreshold: 2
+            initialDelaySeconds: 6
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            failureThreshold: 2
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+          resources:
+            limits:
+              cpu: 1
+              memory: 1G
+            requests:
+              cpu: .25
+              memory: .5G
+
+
+--- 
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ui
+  namespace: polygon
+  labels:
+    app: ui
+    project: polygon-ui
+spec:
+  ports:
+  - port: 80
+    targetPort: http
+  selector:
+    app: ui
+    project: polygon-ui
+
+
